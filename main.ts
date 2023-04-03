@@ -16,6 +16,13 @@ input.onButtonPressed(Button.B, function () {
     strip.clear()
     positionLed += -1
 })
+/**
+ * Led starts iln the middles.  Two players button mash to move the led toward them.  If it reaches the end, then it will light up there color.  2 seconds later the game resets.  No music or flashing lights is added.
+ * 
+ * Possible additions:  Change brightness as you get closer to your goal.  Change the pitch of the sound when the button is clicked.  Add sounds for a/b buttons.  
+ * 
+ * Add a secret slow sequence that if done correctly will change your led by 5 or 10.  EX.  If you click 3 times at one second exactish intervals, then change the position by 10.
+ */
 let strip: neopixel.Strip = null
 let positionLed = 0
 let length = 0
@@ -41,6 +48,10 @@ basic.forever(function () {
         } else {
             strip.setPixelColor(positionLed, neopixel.colors(NeoPixelColors.Blue))
         }
+        led.plotBarGraph(
+        numRedClicks + numBlueClicks,
+        5 * length
+        )
         strip.show()
     }
 })
